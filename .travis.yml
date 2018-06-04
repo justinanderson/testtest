@@ -1,22 +1,24 @@
-#
 sudo: false
 
 language: python
+
+python:
+  - '3.6'
 
 services:
   - docker
 
 install:
+  - docker-compose pull
   - docker-compose build
+  - pip install -r requirements.txt
 
 before_script:
-  - docker-compose pull
   - docker-compose up -d
   - sh wait-for-url.sh http://localhost:8080/ echo "Ready!"
 
 script:
-  - docker images
-  - docker ps -a
-
+  - behave
+  
 after_script:
   - docker-compose down -v
