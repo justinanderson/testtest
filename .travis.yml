@@ -1,0 +1,19 @@
+sudo: false
+
+language: python
+
+services:
+  - docker
+
+install:
+  - docker-compose build
+
+before_script:
+  - docker-compose up
+
+script:
+  - docker images
+  - docker ps -a
+
+after_script:
+  - docker-compose down -v

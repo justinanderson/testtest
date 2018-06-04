@@ -1,0 +1,5 @@
+version: 2
+
+services:
+  oidc:
+    image: mitcxsci/mitreid-connect-overlay
