@@ -10,7 +10,9 @@ install:
   - docker-compose build
 
 before_script:
+  - docker-compose pull
   - docker-compose up
+  - sh wait-for-url.sh http://localhost:8080/ echo "Ready!"
 
 script:
   - docker images

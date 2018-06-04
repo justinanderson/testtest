@@ -3,3 +3,5 @@ version: '2'
 services:
   oidc:
     image: mitcxsci/mitreid-connect-overlay
+    ports:
+      - '8080:8080'
