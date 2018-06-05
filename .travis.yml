@@ -23,6 +23,7 @@ before_script:
 
 script:
   - behave
+  - echo "Finished!"
   
 after_script:
   - docker-compose down -v
