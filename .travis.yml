@@ -12,6 +12,10 @@ cache: pip
 services:
   - docker
 
+addons:
+  hosts:
+    - oidc
+
 install:
   - docker-compose pull
   - docker-compose build
@@ -19,7 +23,7 @@ install:
 
 before_script:
   - docker-compose up -d
-  - sh wait-for-url.sh http://localhost:8080/ echo "Ready!"
+  - sh wait-for-url.sh http://oidc:8080/ echo "Ready!"
 
 script:
   - behave
