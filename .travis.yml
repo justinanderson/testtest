@@ -1,5 +1,7 @@
 sudo: false
 
+# Paired with "Build pushed branches" and "Build pushed pull requests" setting
+# to limit builds to pushes to master branch and PRs.
 branches:
   only: 
     - master
@@ -16,21 +18,21 @@ cache: pip
 services:
   - docker
 
+# Add oidc to /etc/hosts as an alias for localhost
 addons:
   hosts:
     - oidc
 
 install:
-  - docker-compose pull
-  - docker-compose build
-  - pip install -r requirements.txt
+  - docker-compose -f docker-compose-test.yml pull
+  - pip install -e test
 
 before_script:
   - docker-compose up -d
-  - sh wait-for-url.sh http://oidc:8080/ echo "Ready!"
+  - sh test/wait-for-url.sh http://oidc:8080/ echo "oidc ready!"
 
 script:
   - behave
   
 after_script:
-  - docker-compose down -v
+  - docker-compose -f docker-compose-test.yml down -v

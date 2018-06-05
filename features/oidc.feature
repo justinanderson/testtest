@@ -1,7 +1,7 @@
 Feature: Expected OIDC server functionality
 
   Background:
-    Given an OIDC server at http://localhost:8080/
+    Given an OIDC server at http://oidc:8080/
 
   Scenario Outline: Dynamically register a client
     When we register a client with <name>, <grant_type>, <redirect_uri>, <scopes>
